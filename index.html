@@ -1,231 +1,424 @@
+
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop BeautyBio | المتجر الرسمي الفخم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff0080;
-            --secondary: #00c3ff;
-            --accent: #ffd700;
-            --bg-dark: #05080f;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-/* أساسيات الصفحة */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-  font-family: 'Cairo', sans-serif; 
-  scroll-behavior: smooth; 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Beauty View</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ================= المتغيرات (الألوان الأساسية للموقع) ================= */
+:root {
+    --primary: #ff0080;
+    --secondary: #00c3ff;
+    --accent: #facc15;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
 }
 
-/* خلفية الصفحة (غراديان أزرق متحرك احترافي) */
-body { 
-  /* تدرج بـ 3 ألوان زرقاء فخمة */
-  background: linear-gradient(-45deg, #000428, #004e92, #0a2a43);
-  background-size: 400% 400%;
-  animation: moveGradient 12s ease infinite;
-  color: white; 
-  overflow-x: hidden; 
-  line-height: 1.7;
-  
-  /* توسيط الفيديو في الشاشة */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+/* ================= BASE ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo', sans-serif;
+}
+
+body {
+    /* الخلفية الزرقاء المتحركة الاحترافية */
+    background: linear-gradient(-45deg, #000428, #004e92, #0a2a43);
+    background-size: 400% 400%;
+    animation: moveGradient 12s ease infinite;
+    color: white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 /* حركة الألوان في الخلفية */
 @keyframes moveGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ================= TOP ================= */
+.top{
+    background:linear-gradient(90deg,#ff0080,#8b5cf6,#00c3ff);
+    text-align:center;
+    padding:18px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* ================= HEADER ================= */
+.header{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.trust {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.logo{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid white;
+}
+
+.logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* تنسيق فيديو الريل */
 .reel-video {
-  width: 100%;
-  max-width: 400px; /* باه الفيديو ما يجيش عريض بزاف في الميكرو */
-  aspect-ratio: 9 / 16; /* الحفاظ على شكل الريل الطولي */
-  object-fit: cover;
-  border-radius: 15px; /* حواف دائرية باه يبان عصري */
-  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.6); /* ظل احترافي يعزل الفيديو على الخلفية */
+    width: 100%;
+    max-width: 400px; 
+    aspect-ratio: 9 / 16; 
+    object-fit: cover;
+    border-radius: 15px; 
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.6); 
 }
  
+/* إشعار مبيعات حي (Pop-up) */
+.sales-notif {
+    position: fixed; bottom: 20px; right: 20px;
+    background: rgba(255, 255, 255, 0.98); color: #111; padding: 15px 25px;
+    border-radius: 20px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 999;
+    transform: translateY(250%); transition: 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    font-size: 14px; font-weight: 700; border-right: 6px solid var(--primary);
+}
+.sales-notif.show { transform: translateY(0); }
 
-        /* إشعار مبيعات حي (Pop-up) */
-        .sales-notif {
-            position: fixed; bottom: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.98); color: #111; padding: 15px 25px;
-            border-radius: 20px; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 999;
-            transform: translateY(250%); transition: 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            font-size: 14px; font-weight: 700; border-right: 6px solid var(--primary);
-        }
-        .sales-notif.show { transform: translateY(0); }
+/* الهيدر الزجاجي */
+header { 
+    padding: 20px; border-bottom: 1px solid var(--glass-border); 
+    text-align: center; position: sticky; top: 0; z-index: 1000; 
+    background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(15px); 
+}
+.logo-box { 
+    width: 85px; height: 85px; margin: auto; border-radius: 50%; 
+    border: 3px solid var(--primary); overflow: hidden; 
+    box-shadow: 0 0 25px rgba(255, 0, 128, 0.5); background: #000;
+}
+.logo-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* الهيدر الزجاجي */
-        header { 
-            padding: 20px; border-bottom: 1px solid var(--glass-border); 
-            text-align: center; position: sticky; top: 0; z-index: 1000; 
-            background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(15px); 
-        }
-        .logo-box { 
-            width: 85px; height: 85px; margin: auto; border-radius: 50%; 
-            border: 3px solid var(--primary); overflow: hidden; 
-            box-shadow: 0 0 25px rgba(255, 0, 128, 0.5); background: #000;
-        }
-        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
+/* ================= قسم الهيرو (معدل للحركة والتجاوب مع الهاتف) ================= */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
 
-        /* قسم الهيرو */
-        .hero { padding: 80px 20px; text-align: center; max-width: 1000px; margin: auto; }
-        .hero h1 { 
-            font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; 
-            background: linear-gradient(to right, #fff, var(--secondary), var(--primary)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            margin-bottom: 20px; line-height: 1.2;
-        }
-        .hero p { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 40px; max-width: 700px; margin-inline: auto; }
+.hero > img { 
+    width: 100%; 
+    max-width: 400px; 
+    border-radius: 20px; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+}
 
-        /* العداد التنازلي */
-        .timer-container { display: flex; justify-content: center; gap: 15px; margin: 40px 0; }
-        .timer-box { 
-            background: var(--glass-bg); border: 1px solid var(--glass-border); 
-            padding: 20px; min-width: 90px; border-radius: 25px; 
-            backdrop-filter: blur(10px); box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
-        }
-        .timer-box span { display: block; font-size: 32px; font-weight: 900; color: var(--accent); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-        .timer-box label { font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 700; }
+.hero-text {
+    flex: 1;
+}
 
-        /* صندوق النتائج */
-        .results-box { 
-            max-width: 650px; margin: 60px auto; border-radius: 40px; 
-            overflow: hidden; border: 1px solid var(--glass-border); 
-            position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.7);
-        }
-        .results-box img { width: 100%; display: block; transition: 0.6s; }
-        .results-box:hover img { transform: scale(1.05); }
-        .results-label { 
-            position: absolute; top: 25px; right: 25px; 
-            background: var(--primary); color: white; padding: 8px 25px; 
-            border-radius: 30px; font-size: 14px; font-weight: 800; 
-            box-shadow: 0 10px 20px rgba(255,0,128,0.4);
-        }
+/* حركة الدخول من اليسار إلى اليمين */
+@keyframes slideLeftToRight {
+    0% { opacity: 0; transform: translateX(-80px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
 
-        /* شبكة العروض */
-        .product-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 60px 20px; }
-        
-        .p-card { 
-            background: var(--glass-bg); border: 1px solid var(--glass-border); 
-            border-radius: 45px; width: 380px; padding: 40px; 
-            text-align: center; position: relative; backdrop-filter: blur(20px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
+.hero-text h1 {
+    font-size: 52px;
+    background: linear-gradient(90deg, #fff, #00c3ff, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px; 
+    line-height: 1.2;
+    opacity: 0;
+    animation: slideLeftToRight 0.8s ease forwards;
+}
 
-        .p-card:hover { 
-            transform: translateY(-25px); 
-            border-color: var(--secondary);
-            box-shadow: 0 30px 60px rgba(0, 195, 255, 0.2);
-            background: rgba(255, 255, 255, 0.06);
-        }
-        
-        .p-card.featured { border: 2.5px solid var(--primary); }
-        .p-card.featured::before { 
-            content: "العرض الأكثر توفيراً 🔥"; 
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%); 
-            background: var(--primary); color: white; padding: 8px 30px; 
-            border-radius: 0 0 20px 20px; font-size: 13px; font-weight: 900; 
-            box-shadow: 0 10px 20px rgba(255,0,128,0.4);
-        }
+.hero p { 
+    color: #a1a1aa; 
+    font-size: 1.2rem; 
+    margin-bottom: 20px; 
+    max-width: 700px; 
+    font-weight: bold; 
+    opacity: 0;
+    animation: slideLeftToRight 0.8s ease 0.2s forwards;
+}
 
-        .p-img { width: 100%; height: 350px; border-radius: 30px; object-fit: cover; margin-bottom: 25px; }
-        .price { font-size: 42px; font-weight: 900; color: white; margin-bottom: 5px; }
-        .save-tag { display: block; color: var(--accent); font-weight: 800; font-size: 18px; margin-bottom: 25px; }
+.rating { 
+    font-size: 24px; 
+    color: var(--accent); 
+    margin-bottom: 10px; 
+    font-weight: bold; 
+    opacity: 0;
+    animation: slideLeftToRight 0.8s ease 0.4s forwards;
+}
+.rating span { color: white; font-size: 16px; margin-right: 10px; }
 
-        .btn-order { 
-            width: 100%; padding: 22px; border: none; border-radius: 25px; 
-            background: linear-gradient(45deg, var(--primary), var(--secondary)); 
-            color: white; font-weight: 900; cursor: pointer; font-size: 22px;
-            box-shadow: 0 15px 30px rgba(255, 0, 128, 0.4); transition: 0.3s;
-        }
-        .btn-order:hover { transform: scale(1.05); filter: brightness(1.1); }
+.free { 
+    display: inline-block; 
+    background: rgba(0, 195, 255, 0.2); 
+    border: 1px solid var(--secondary); 
+    padding: 8px 20px; 
+    border-radius: 20px; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    color: var(--secondary); 
+    opacity: 0;
+    animation: slideLeftToRight 0.8s ease 0.6s forwards;
+}
 
-        /* نافذة المعلومات */
-        #mainModal { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95); 
-            display: none; justify-content: center; align-items: center; 
-            z-index: 10000; backdrop-filter: blur(20px); 
-        }
-        .modal-inner { 
-            background: white; color: #111; padding: 45px; 
-            border-radius: 40px; width: 95%; max-width: 480px; 
-            text-align: center; position: relative;
-            animation: slideUp 0.4s ease-out;
-        }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .modal-inner h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; }
-        .modal-inner input { 
-            width: 100%; padding: 18px; margin: 10px 0; border-radius: 15px; 
-            border: 2px solid #eee; text-align: right; font-size: 17px; outline: none;
-        }
-        .modal-inner input:focus { border-color: var(--primary); }
+/* زر الهيرو "اشتري الآن" مع النبض */
+.btn {
+    display: block;
+    width: fit-content;
+    margin: 10px 0 40px 0;
+    padding: 18px 50px;
+    border: none;
+    border-radius: 35px;
+    background: linear-gradient(45deg, var(--primary), #ff6a00);
+    color: white;
+    font-weight: 900;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 0, 128, 0.5);
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: slideLeftToRight 0.8s ease 0.8s forwards, pulse 2s infinite 1.6s;
+}
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.8);
+    filter: brightness(1.1);
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 128, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 0, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 128, 0); }
+}
 
-        /* التعليقات */
-        .reviews-section { padding: 80px 20px; max-width: 900px; margin: auto; }
-        .reviews-title { 
-            text-align: center; margin-bottom: 50px; font-size: 2rem; font-weight: 900; 
-            background: linear-gradient(45deg, #fff, var(--primary)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        }
-        .review-card { 
-            background: var(--glass-bg); padding: 35px; border-radius: 35px; 
-            border: 1px solid var(--glass-border); margin-bottom: 30px; 
-            text-align: right; backdrop-filter: blur(10px); transition: 0.4s;
-        }
-        .review-card:hover { transform: scale(1.02); border-color: var(--secondary); }
-        .stars { color: var(--accent); font-size: 22px; display: block; margin-bottom: 15px; }
-        .review-text { font-style: italic; color: #e4e4e7; font-size: 1.1rem; line-height: 1.8; }
-        .reviewer-name { display: block; margin-top: 20px; color: var(--secondary); font-weight: 900; }
+/* ================= شاشات الهواتف (لضبط الحجم والشكل) ================= */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+        gap: 20px;
+    }
+    .hero-text {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero > img {
+        width: 80%;
+        max-width: 280px; /* تصغير الصورة في الهاتف */
+        margin-bottom: 10px;
+    }
+    .hero-text h1 {
+        font-size: 40px; /* تصغير العنوان */
+    }
+    .btn {
+        margin: 10px auto;
+        font-size: 20px;
+        padding: 15px 40px; /* تصغير الزر */
+    }
+}
 
-        footer { text-align: center; padding: 60px; border-top: 1px solid var(--glass-border); color: #555; }
-    </style>
+/* ================= الأزرار الأخرى ================= */
+.btn-order { 
+    width: 100%; padding: 22px; border: none; border-radius: 25px; 
+    background: linear-gradient(45deg, var(--primary), var(--secondary)); 
+    color: white; font-weight: 900; cursor: pointer; font-size: 22px;
+    box-shadow: 0 10px 25px rgba(255, 0, 128, 0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; overflow: hidden;
+}
+.btn-order:hover { 
+    transform: translateY(-5px) scale(1.03); 
+    box-shadow: 0 20px 40px rgba(255, 0, 128, 0.6);
+    filter: brightness(1.15); 
+}
+
+.btn-cancel {
+    background: none; border: none; margin-top: 20px; color: #999; 
+    cursor: pointer; font-weight: 900; font-size: 16px;
+    transition: 0.3s;
+}
+.btn-cancel:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+/* العداد التنازلي */
+.timer-container { display: flex; justify-content: center; gap: 15px; margin: 40px 0; }
+.timer-box { 
+    background: var(--glass-bg); border: 1px solid var(--glass-border); 
+    padding: 20px; min-width: 90px; border-radius: 25px; 
+    backdrop-filter: blur(10px); box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
+}
+.timer-box span { display: block; font-size: 32px; font-weight: 900; color: var(--accent); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+.timer-box label { font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 700; }
+
+/* صندوق النتائج */
+.results-box { 
+    max-width: 650px; margin: 60px auto; border-radius: 40px; 
+    overflow: hidden; border: 1px solid var(--glass-border); 
+    position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+}
+.results-box img { width: 100%; display: block; transition: 0.6s; }
+.results-box:hover img { transform: scale(1.05); }
+.results-label { 
+    position: absolute; top: 25px; right: 25px; 
+    background: var(--primary); color: white; padding: 8px 25px; 
+    border-radius: 30px; font-size: 14px; font-weight: 800; 
+    box-shadow: 0 10px 20px rgba(255,0,128,0.4);
+}
+
+/* شبكة العروض */
+.product-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 60px 20px; }
+
+.p-card { 
+    background: var(--glass-bg); border: 1px solid var(--glass-border); 
+    border-radius: 45px; width: 380px; padding: 40px; 
+    text-align: center; position: relative; backdrop-filter: blur(20px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.p-card:hover { 
+    transform: translateY(-20px); 
+    border-color: var(--secondary);
+    box-shadow: 0 30px 60px rgba(0, 195, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.p-card.featured { border: 2.5px solid var(--primary); }
+.p-card.featured::before { 
+    content: "العرض الأكثر توفيراً 🔥"; 
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%); 
+    background: var(--primary); color: white; padding: 8px 30px; 
+    border-radius: 0 0 20px 20px; font-size: 13px; font-weight: 900; 
+    box-shadow: 0 10px 20px rgba(255,0,128,0.4);
+}
+
+.p-img { width: 100%; height: 350px; border-radius: 30px; object-fit: cover; margin-bottom: 25px; transition: 0.4s; }
+.p-card:hover .p-img { transform: scale(1.05); }
+.price { font-size: 42px; font-weight: 900; color: white; margin-bottom: 5px; }
+.save-tag { display: block; color: var(--accent); font-weight: 800; font-size: 18px; margin-bottom: 25px; }
+
+/* نافذة المعلومات */
+#mainModal { 
+    position: fixed; inset: 0; background: rgba(0,0,0,0.95); 
+    display: none; justify-content: center; align-items: center; 
+    z-index: 10000; backdrop-filter: blur(20px); 
+}
+.modal-inner { 
+    background: white; color: #111; padding: 45px; 
+    border-radius: 40px; width: 95%; max-width: 480px; 
+    text-align: center; position: relative;
+    animation: slideUp 0.4s ease-out;
+}
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-inner h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; }
+.modal-inner input { 
+    width: 100%; padding: 18px; margin: 10px 0; border-radius: 15px; 
+    border: 2px solid #eee; text-align: right; font-size: 17px; outline: none;
+    transition: 0.3s;
+}
+.modal-inner input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,0,128,0.2); transform: scale(1.02); }
+
+/* التعليقات */
+.reviews-section { padding: 80px 20px; max-width: 900px; margin: auto; }
+.reviews-title { 
+    text-align: center; margin-bottom: 50px; font-size: 2rem; font-weight: 900; 
+    background: linear-gradient(45deg, #fff, var(--primary)); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+}
+.review-card { 
+    background: var(--glass-bg); padding: 35px; border-radius: 35px; 
+    border: 1px solid var(--glass-border); margin-bottom: 30px; 
+    text-align: right; backdrop-filter: blur(10px); transition: 0.4s;
+}
+.review-card:hover { transform: scale(1.02); border-color: var(--secondary); box-shadow: 0 10px 30px rgba(0, 195, 255, 0.1); }
+.stars { color: var(--accent); font-size: 22px; display: block; margin-bottom: 15px; }
+.review-text { font-style: italic; color: #e4e4e7; font-size: 1.1rem; line-height: 1.8; }
+.reviewer-name { display: block; margin-top: 20px; color: var(--secondary); font-weight: 900; }
+
+footer { text-align: center; padding: 60px; border-top: 1px solid var(--glass-border); color: #555; font-weight: bold; }
+
+/* قسم السوشيال بروف */
+.social-proof-section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+.sp-title { text-align: center; margin-bottom: 40px; font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.sp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.sp-card { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: 0.3s; }
+.sp-card:hover { transform: translateY(-10px); border-color: var(--secondary); box-shadow: 0 15px 30px rgba(0, 195, 255, 0.15); }
+.sp-video { width: 100%; border-radius: 20px; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.1); object-fit: cover; height: 480px; }
+.sp-label { display: block; text-align: center; font-weight: 800; color: var(--secondary); margin-top: 10px; font-size: 15px; }
+</style>
 </head>
+
 <body>
 
-    <div class="sales-notif" id="salesNotif">
-        <div style="background: #22c55e; width: 10px; height: 10px; border-radius: 50%;"></div>
-        <span id="notifText">أكدت سارة من وهران طلبيتها الآن 🛍️</span>
-    </div>
+<div class="top">🚚 توصيل مجاني + الدفع عند الاستلام</div>
 
-    <header>
-        <div class="logo-box"><img src="Bio.jpg"></div>
-        <h2 style="margin-top: 15px; font-weight: 900;">Shop BeautyBio</h2>
-    </header>
+<div class="header">
+<div class="logo"><img src="Bio.jpg"></div>
+<div class="title">Shop BeautyBio</div>
+</div>
 
-   <style>
-    .social-proof-section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-    .sp-title { text-align: center; margin-bottom: 40px; font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-    .sp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .sp-card { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: 0.3s; }
-    .sp-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
-    .sp-video { width: 100%; border-radius: 20px; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.1); object-fit: cover;width:190px; height: 480px; /* تحديد الطول لتوحيد المظهر */ }
-    .sp-label { display: block; text-align: center; font-weight: 800; color: var(--secondary); margin-top: 10px; font-size: 15px; }
-</style>
+<div class="trust">
+⭐ تقييم 4.9 ★★★★★ | 💯 جودة مضمونة | 🚚 توصيل سريع
+</div>
+
+<div class="hero">
+
+<img src="Bio.jpg">
+
+<div class="hero-text">
+<h1>الثقة<br>الجودة<br>السعر</h1>
+
+<p>زيت طبيعي لتطويل الرموش والحواجب</p>
+
+<div class="rating">★★★★★ <span>تقييم 4.9</span></div>
+
+<div class="free">🚚 توصيل مجاني</div>
+
+<button class="btn" onclick="document.getElementById('products').scrollIntoView()">اشتري الآن</button>
+</div>
+</div>
 
 <section class="social-proof-section">
-    <h2 class="sp-title">آراء زبوناتنا والمشاهير 🌟</h2>
-    <div class="sp-grid">
-        <div class="sp-card">
-            <section class="section-box">
+    <div class="sp-card">
+        <section class="section-box">
 
     <h2 style="text-align: center; margin-bottom: 40px; font-weight: 900; background: linear-gradient(45deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">رأي زبوناتنا والمشاهير في المنتج 🌟</h2>
     
@@ -243,10 +436,11 @@ body {
         </div>
     </div>
 </section>
+</div>
+</section>
 
 
-
-    <section class="product-grid">
+    <section class="product-grid" id="products">
         <div class="p-card">
             <img src="produis.png" class="p-img">
             <h3>عبوة 'سر الإفريقيات' الملكية</h3>
@@ -291,11 +485,16 @@ body {
             <input type="tel" id="custPhone" placeholder="رقم الهاتف">
             <input type="text" id="custCity" placeholder="الولاية">
             <button class="btn-order" style="margin-top: 15px;" onclick="finishOrder()">إرسال عبر واتساب ✅</button>
-            <button onclick="closeOrderModal()" style="background:none; border:none; margin-top:20px; color:#999; cursor:pointer; font-weight:900;">إلغاء</button>
+            <button class="btn-cancel" onclick="closeOrderModal()">إلغاء</button>
         </div>
     </div>
 
     <footer><p>© 2026 Shop BeautyBio | جميع الحقوق محفوظة</p></footer>
+
+    <div class="sales-notif" id="salesNotif">
+        <div style="background: #22c55e; width: 10px; height: 10px; border-radius: 50%;"></div>
+        <span id="notifText">أكدت سارة من وهران طلبيتها الآن 🛍️</span>
+    </div>
 
     <script>
         let currentPackage = "";
@@ -324,17 +523,10 @@ body {
             window.location.href = `https://wa.me/213794440945?text=${message}`;
         }
 
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('hours').innerText = String(23-now.getHours()).padStart(2,'0');
-            document.getElementById('minutes').innerText = String(59-now.getMinutes()).padStart(2,'0');
-            document.getElementById('seconds').innerText = String(59-now.getSeconds()).padStart(2,'0');
-        }, 1000);
-
         function showSales() {
-            const names = ["ليلى", "سارة", "فاطمة", "إيمان", "مريم"];
-            const cities = ["الجزائر", "وهران", "سطيف", "بجاية", "تلمسان"];
-            document.getElementById('notifText').innerText = `أكدت ${names[Math.floor(Math.random()*5)]} من ${cities[Math.floor(Math.random()*5)]} طلبيتها الآن 🛍️`;
+            const names = ["ليلى", "سارة", "فاطمة", "إيمان", "مريم", "أحلام", "ياسمين"];
+            const cities = ["الجزائر", "وهران", "سطيف", "بجاية", "تلمسان", "عنابة", "قسنطينة"];
+            document.getElementById('notifText').innerText = `أكدت ${names[Math.floor(Math.random()*names.length)]} من ${cities[Math.floor(Math.random()*cities.length)]} طلبيتها الآن 🛍️`;
             document.getElementById('salesNotif').classList.add('show');
             setTimeout(() => document.getElementById('salesNotif').classList.remove('show'), 5000);
         }
